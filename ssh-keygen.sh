@@ -3,9 +3,12 @@
 #ssh-keygen -t ed25519 -C "for Ansible"
 #ssh-keygen -t ed25519 -C "for root user"   #only one time
 
-
-readarray -t ip < inventory
-
+ip=()
+  while IFS= read -r line; do
+    if [[ $line =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]] ; then
+      ip+=("$line")
+    fi
+done < "inventory"
 #cd
 #cd .ssh
 #echo '99856722' > passfile
@@ -16,7 +19,7 @@ readarray -t pass < passfile
 
 for i in ${!ip[@]}; do
 
-    sshpass -p ${pass[$i]} ssh -o StrictHostKeyChecking=no root@${ip[$i]} "exit"
+   sshpass -p ${pass[$i]} ssh -o StrictHostKeyChecking=no root@${ip[$i]} "exit"
     
     sshpass -p ${pass[$i]} ssh-copy-id -i /root/.ssh/ansible.pub ${ip[$i]}  # mubeen@192.168.52.136
 

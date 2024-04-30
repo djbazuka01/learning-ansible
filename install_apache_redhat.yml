@@ -1,0 +1,21 @@
+---
+
+- hosts: redhat_servers
+ # become: true
+  tasks:
+
+  - name: Update redhat repo
+    yum:  #general package mamnager 
+      update_cache: yes
+    when: ansible_distribution == "RedHat"
+
+  #- name: Install apache, php packages and run update
+  #  package:  #general package mamnager 
+  #    name: 
+   #      - apache2
+   #      - libapache2-mod-php
+    #  state: latest
+    #  update_cache: yes
+#    when: ansible_distribution == "Ubuntu" 
+    #when: ansible_distribution in ["Ubuntu" , "Debian"] and ansible_version == "8.2"
+ 
