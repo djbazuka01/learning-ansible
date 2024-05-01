@@ -23,12 +23,15 @@ ansible all -m yum -a name=vi
 ansible-playbook install_apache.yml
 ansible-playbook --ask-become-pass install_apache.yml
 
+ansible-playbook --list-tags dite.yml
+ansible-playbook --tags apache site.yml
 
 #playbooks
 
-pre_task: 
-
+pre_task:   
 #to run things in certain order in the playbook 
+
+
 
 
 
