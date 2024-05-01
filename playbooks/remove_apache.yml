@@ -5,6 +5,7 @@
   tasks:
 
   - name: Remove apache package
-    apt: 
+    #apt:
+    package:  
       name: apache2
       state: absent
