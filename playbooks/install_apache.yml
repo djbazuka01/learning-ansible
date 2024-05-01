@@ -11,11 +11,13 @@
   - name: copy files to html server
     tags: copy
     copy:
+   # unarchieve: this module will just unzip a zip file where src is downloading a zip
       src: site.html
       dest: /var/www/html/index.html
       owner: root
       group: root
       mode: 0644
+      #remote_src: yes when the src is set to something that is not avilable locally
 
 
   - name: Install apache, php packages and run update

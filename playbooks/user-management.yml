@@ -1,0 +1,26 @@
+---
+
+ - hosts: all
+   tasks: 
+
+   - name: create a user
+     tags: always
+     user:
+       name: jerome
+       groups: root
+
+
+   - name: add ssh key for jerome
+     tags: always
+     authorized_key:
+       user: jerome
+       key: "xxxx"
+
+   - name: add sudoer file for jerome
+     tags: always
+     copy:
+       src: sudo_file_for_jerome
+       dest: /etc/sudoers.d/simone
+       owner: root
+       group: root
+
