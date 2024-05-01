@@ -8,9 +8,18 @@
   #  yum:  #general package mamnager 
   #    update_cache: yes
   #  when: ansible_distribution == "RedHat"
+  - name: copy files to html server
+    tags: copy
+    copy:
+      src: site.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644
+
 
   - name: Install apache, php packages and run update
-    tags: apache
+    tags: apache # tags: apache,db
     package:  #general package mamnager 
       name: 
          - apache2

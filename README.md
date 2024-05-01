@@ -25,6 +25,7 @@ ansible-playbook --ask-become-pass install_apache.yml
 
 ansible-playbook --list-tags dite.yml
 ansible-playbook --tags apache site.yml
+ansible-playbook --tags "apache,db" site.yml
 
 #playbooks
 
