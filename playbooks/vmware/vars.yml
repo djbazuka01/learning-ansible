@@ -1,0 +1,7 @@
+---
+vcenter_hostname: "192.168.54.15"
+vcenter_datacenter: "datastore1"
+vcenter_validate_certs: "false"
+vcenter_username: "root"
+vcenter_password: "leotest9075!"
+vm_name: "lcc-tcs-install"

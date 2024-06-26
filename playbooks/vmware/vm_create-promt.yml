@@ -1,0 +1,50 @@
+---
+- name: Creating VM using user input
+  hosts: esxi_host
+  become: false
+  gather_facts: false
+  
+
+  vars_prompt:
+    
+    - name: ostype
+      prompt: What OS ?
+      private: false
+
+    - name: cpu
+      prompt: How many CPU ?
+      private: false
+
+    - name: memory
+      prompt: How much memory ?
+      private: false
+
+    - name: disk
+      prompt: disk size ?
+      private: false
+
+    - name: vmname
+      prompt: What is vm name ?
+      private: false
+     
+  vars:
+    vm:
+     iso_path: "ISO"
+     datastore: "datastore1"
+
+  tasks:
+    - name: Create VM Directory
+      file:
+        path: /vmfs/volumes/{{ vm.datastore }}/{{ vmname }}
+        state: directory
+
+
+    - name: Creating VMX file    
+      template:
+        src: /root/Ansible/learning-ansible/playbooks/vmware/lcs-proxy-vm.bak
+        dest: /vmfs/volumes/{{ vm.datastore }}/{{ vmname }}/{{ vmname }}.vmx
+        mode: '0755'
+
+    - name: Chanage the File
+      shell: sed -i 's/lcs-proxy-viewer/{{ vmname }}/' /vmfs/volumes/{{ vm.datastore }}/{{ vmname }}/{{ vmname }}.vmx
+  #  - debug: msg="{{ vminfo.stdout }}"

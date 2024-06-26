@@ -1,0 +1,26 @@
+---
+- name: info vm demo
+  hosts: esxi_host
+  become: false
+  gather_facts: false
+
+
+  vars:
+    vm:
+      name: "lcc-tcs-install"
+
+
+  vars_prompt:
+    
+    - name: vmnamepromt
+      prompt: Which VM ?
+      private: false
+     
+
+
+  tasks:
+    - name: get vm info
+      shell: "vim-cmd vmsvc/getallvms | grep {{ vmnamepromt }}"
+      register: vminfo
+
+    - debug: msg="{{ vminfo.stdout }}"
